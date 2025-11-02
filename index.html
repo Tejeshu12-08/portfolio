@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    html {
+      font-size: 18px;
+    }
+
+    body {
+      background: url('hey.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 25px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: #00ffff;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 18px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ffff;
+    }
+
+    section {
+      padding: 70px 5%;
+      margin-top: 70px;
+    }
+
+    #home {
+      margin-top: 120px;
+    }
+
+    .profile-img {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 5px solid #00ffff;
+  margin: 20px auto;
+  overflow: hidden;
+  background: rgba(0, 255, 255, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #home h2 {
+  margin-top: 20px;
+  color: #00ffff;
+  font-size: 1.8rem;
+}
+
+
+    #home p {
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    /* ✅ Info box for Profile + About + Buttons together */
+    .info-box {
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 18px;
+      padding: 40px 25px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+      text-align: center;
+    }
+
+    .info-box h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin-top: 15px;
+    }
+
+    .info-box p {
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-top: 8px;
+    }
+
+    .info-box .about-text {
+      margin-top: 20px;
+      color: #ddd;
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 0 10px;
+    }
+
+    .info-box .achievement-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Skills */
+    #skills {
+      text-align: left;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    #skills h3 {
+      text-align: center;
+      color: #00ffff;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    .skill {
+      margin: 18px auto;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .skill-name {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+    }
+
+    .skill-bar {
+      background: #151515;
+      height: 10px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-level {
+      height: 100%;
+      width: 0;
+      background: #00ffff;
+      transition: width 1.5s ease-out;
+    }
+
+    .skill p {
+      margin: 5px 0 12px 40px;
+      color: #ccc;
+      font-size: 1rem;
+    }
+
+    /* ✅ PROJECT BOX STYLE */
+    #projects {
+      text-align: center;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .project-card {
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 25px;
+      margin: 25px auto;
+      width: 90%;
+      max-width: 1000px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      color: #ccc;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    /* Experience */
+    #experience {
+      text-align: center;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    #experience h3 {
+      color: #00ffff;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .exp-card {
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 25px;
+      margin: 25px auto;
+      width: 90%;
+      max-width: 1000px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .exp-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    button {
+      background: #00ffff;
+      color: #000000;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #00cccc;
+      transform: scale(1.05);
+    }
+
+    /* Contact Section */
+    #contact {
+      text-align: center;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    form {
+      background: rgba(0, 0, 0, 0.8);
+      display: inline-block;
+      padding: 25px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #222;
+      color: white;
+      font-size: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      margin-top: 30px;
+      font-size: 1rem;
+    }
+
+    .social-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-links a img {
+      width: 30px;
+      height: 30px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s;
+    }
+
+    .social-links a:hover img {
+      transform: scale(1.2);
+      filter: invert(71%) sepia(87%) saturate(287%) hue-rotate(136deg) brightness(101%) contrast(104%);
+    }
+
+    /* ✅ Responsive */
+    @media (max-width: 768px) {
+      html { font-size: 16px; }
+      nav { flex-direction: column; gap: 10px; }
+      section { padding: 40px 5%; }
+      .profile-img { width: 180px; height: 180px; }
+
+      button { width: 100%; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>ఉ. తేజేష్</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ✅ ONE Combined Box -->
+  <section id="home">
+    <div class="info-box">
+      <div class="profile-img">
+        <img src="profile.jpg" alt="Tejesh U">
+      </div>
+      <h2>Tejesh U</h2>
+      <p>Cybersecurity Enthusiast | Ethical Hacker | Network Defender</p>
+
+      <div class="about-text">
+        Passionate about cybersecurity, penetration testing, and protecting digital assets. I focus on building secure systems, identifying vulnerabilities, and researching real-world security threats.
+      </div>
+
+      <div class="achievement-buttons">
+        <button onclick="window.location.href='achievements.html'">View Achievements</button>
+        <button onclick="window.open('your-resume-link.pdf', '_blank')">View Resume</button>
+      </div>
+    </div>
+  </section>
+
+
+   <!-- SKILLS -->
+  <section id="skills">
+    <h3>Cybersecurity Tools Expertise</h3>
+
+    <div class="skill">
+      <div class="skill-name">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="nmap.jpg" alt="Nmap" style="width:30px;height:30px;border-radius:5px;">
+          Nmap
+        </div>
+        <span>50%</span>
+      </div>
+      <p>Nmap (Network Mapper) is used for network discovery and vulnerability scanning.</p>
+      <div class="skill-bar"><div class="skill-level" data-skill="50"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="wireshark.jpeg" alt="Wireshark" style="width:30px;height:30px;border-radius:5px;">
+          Wireshark
+        </div>
+        <span>85%</span>
+      </div>
+      <p>Wireshark is a packet analyzer that captures and inspects live network traffic.</p>
+      <div class="skill-bar"><div class="skill-level" data-skill="85"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="burpsuitelogo.jpg" alt="Burp Suite" style="width:30px;height:30px;border-radius:5px;">
+          Burp Suite
+        </div>
+        <span>80%</span>
+      </div>
+      <p>Burp Suite is a web security testing suite used to identify and exploit vulnerabilities.</p>
+      <div class="skill-bar"><div class="skill-level" data-skill="80"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Kali-dragon-icon.svg" alt="Kali Linux" style="width:30px;height:30px;">
+          Kali Linux
+        </div>
+        <span>95%</span>
+      </div>
+      <p>A Linux distro designed for penetration testing and digital forensics.</p>
+      <div class="skill-bar"><div class="skill-level" data-skill="95"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" style="width:30px;height:30px;">
+          Python Scripting
+        </div>
+        <span>80%</span>
+      </div>
+      <p>Automation and exploit scripting language used in cybersecurity.</p>
+      <div class="skill-bar"><div class="skill-level" data-skill="80"></div></div>
+    </div>
+  </section>
+
+  <!-- ✅ PROJECTS WITH SEPARATE BOXES -->
+  <section id="projects">
+    <h3>Projects</h3>
+
+    <div class="project-card">
+      <div class="project-title">Invisible Fence: Port Access Trap</div>
+      <div class="project-desc">A cybersecurity trap system designed to detect unauthorized network access attempts. Built using Python and HTML with browser-based monitoring.</div>
+      <button onclick="window.open('https://github.com/yourusername/invisible-fence', '_blank')">Show Project</button>
+    </div>
+
+    <div class="project-card">
+      <div class="project-title">Online Course Registration System</div>
+      <div class="project-desc">A secure MERN-based platform allowing students to register for courses, track attendance, and view grades securely.</div>
+      <button onclick="window.open('https://github.com/yourusername/course-registration', '_blank')">Show Project</button>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h3>Experience</h3>
+
+    <div class="exp-card">
+      <h4>Internship</h4>
+      <p>Worked on penetration testing, vulnerability analysis, and network defense projects using tools like Burp Suite, Nmap, and Wireshark.</p>
+      <button onclick="window.open('Intern.pdf', '_blank')">View Certificate</button>
+    </div>
+
+    <div class="exp-card">
+      <h4>Research Project</h4>
+      <p>Conducted research on intrusion detection systems and port access monitoring as part of “Invisible Fence: A Port Access Trap for Unauthorized Devices.”</p>
+      <button onclick="window.open('research-paper.pdf', '_blank')">View Research</button>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+  <h2>Reach Out</h2>
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <textarea id="message" placeholder="Your Message...." rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <p id="form-status"></p>
+</section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/Tejeshu12-08" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"></a>
+      <a href="https://www.linkedin.com/in/tejesh-u-12080717vba/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"></a>
+<a href="https://twitter.com/yourusername" target="_blank">
+  <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" alt="Twitter" style="width:30px; height:30px;">
+</a>
+    </div>
+    <p style="margin-top:10px;">© 2025 All rights reserved.</p>
+  </footer>
+
+<!-- ✅ Animate Skill Bars -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const skillLevels = document.querySelectorAll(".skill-level");
+    skillLevels.forEach(level => {
+      const percent = level.getAttribute("data-skill");
+      level.style.width = percent + "%";
+    });
+  });
+</script>
+
+<!-- ✅ Contact Form Handling -->
+<!-- ✅ Supabase Contact Form Handling -->
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+  // ⚙️ Replace with your actual Supabase credentials
+  const SUPABASE_URL = "https://btoeapcxvrtxstvojhjc.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0b2VhcGN4dnJ0eHN0dm9qaGpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxMDI4OTEsImV4cCI6MjA3NzY3ODg5MX0.CQpTsiCPsGS1-H2y9li_K6IToXclAEGPHeDWFl-s5qI";
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Handle form submission
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("form-status");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      status.textContent = "⚠️ Please fill all fields.";
+      return;
+    }
+
+    const { error } = await supabase
+      .from("contact_messages")
+      .insert([{ name, email, message }]);
+
+    if (error) {
+      console.error(error);
+      status.textContent = "❌ Failed to send message. Try again later.";
+    } else {
+      status.textContent = "✅ Message saved successfully!";
+      form.reset();
+    }
+  });
+</script>
+
+
+
+</body>
+</html>
