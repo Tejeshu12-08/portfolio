@@ -16,21 +16,21 @@
       font-size: 18px;
     }
 
-   html, body {
+html, body {
   height: 100%;
-  min-height: 100%;
-  background-color: #000; /* Prevents white background at bottom */
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
 }
 
 body {
-  background: url('hey.jpg') no-repeat center center fixed;
-  background-size: cover;
-  background-attachment: fixed;
-  color: #fff;
-  line-height: 1.7;
-  text-align: center;
+  background: url('hey.jpg') center center / cover no-repeat;
+  background-attachment: scroll;
   position: relative;
-  overflow-x: hidden;
+  min-height: 100%;
 }
 
 body::before {
@@ -40,9 +40,10 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7); /* darker overlay */
+  background: rgba(0, 0, 0, 0.7);
   z-index: -1;
 }
+
 
     header {
       background: rgba(0, 0, 0, 0.8);
@@ -387,6 +388,14 @@ body::before {
   .menu-toggle {
     display: block;
   }
+}
+
+section {
+  background: transparent;
+}
+
+footer {
+  background: rgba(0, 0, 0, 0.85);
 }
 
   
