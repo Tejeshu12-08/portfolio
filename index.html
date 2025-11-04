@@ -540,17 +540,63 @@ footer {
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
+<!-- CONTACT SECTION -->
+<!-- ✅ SECURE CONTACT FORM -->
+<section id="contact">
   <h2>Reach Out</h2>
+
   <form id="contactForm">
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="email" id="email" placeholder="Your Email" required>
-    <textarea id="message" placeholder="Your Message...." rows="5" required></textarea>
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="email" id="email" placeholder="Your Email" required />
+    <textarea id="message" placeholder="Your Message..." rows="5" required></textarea>
     <button type="submit">Send Message</button>
   </form>
+
   <p id="form-status"></p>
 </section>
+
+<!-- ✅ Supabase Secure Contact Form Script -->
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+  // ⚙️ Replace these with your actual Supabase credentials
+  const SUPABASE_URL = "https://tjrliwefwflgpczbcozc.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqcmxpd2Vmd2ZsZ3BjemJjb3pjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNzEyNTIsImV4cCI6MjA3Nzg0NzI1Mn0.mvHQHk61d5BB2oWnUfOJrS5B9pRHYl_5L7lyV-XFcxY";
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("form-status");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      status.textContent = "⚠️ Please fill all fields.";
+      return;
+    }
+
+    // ✅ Insert form data into Supabase
+    const { error } = await supabase
+      .from("contact_messages")
+      .insert([{ name, email, message }]);
+
+    if (error) {
+      console.error(error);
+      status.textContent = "❌ Failed to send message. Try again later.";
+    } else {
+      status.textContent = "✅ Message sent successfully!";
+      form.reset();
+    }
+  });
+</script>
+
+
+
 
   <!-- FOOTER -->
   <footer>
@@ -572,46 +618,6 @@ footer {
       const percent = level.getAttribute("data-skill");
       level.style.width = percent + "%";
     });
-  });
-</script>
-
-<!-- ✅ Contact Form Handling -->
-<!-- ✅ Supabase Contact Form Handling -->
-<script type="module">
-  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-  // ⚙️ Replace with your actual Supabase credentials
-  const SUPABASE_URL = "https://btoeapcxvrtxstvojhjc.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0b2VhcGN4dnJ0eHN0dm9qaGpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxMDI4OTEsImV4cCI6MjA3NzY3ODg5MX0.CQpTsiCPsGS1-H2y9li_K6IToXclAEGPHeDWFl-s5qI";
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // Handle form submission
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("form-status");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    if (!name || !email || !message) {
-      status.textContent = "⚠️ Please fill all fields.";
-      return;
-    }
-
-    const { error } = await supabase
-      .from("contact_messages")
-      .insert([{ name, email, message }]);
-
-    if (error) {
-      console.error(error);
-      status.textContent = "❌ Failed to send message. Try again later.";
-    } else {
-      status.textContent = "✅ Message saved successfully!";
-      form.reset();
-    }
   });
 </script>
 
