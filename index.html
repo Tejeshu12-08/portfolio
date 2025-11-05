@@ -556,15 +556,17 @@ footer {
 </section>
 
 <!-- ✅ Supabase Secure Contact Form Script -->
+<!-- ✅ Load your environment variables first -->
+<script src="env.js"></script>
+
+<!-- ✅ Then your contact form code -->
 <script type="module">
   import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-  // ⚙️ Replace these with your actual Supabase credentials
-  const SUPABASE_URL = " window._env_.https://tjrliwefwflgpczbcozc.supabase.co";
-  const SUPABASE_ANON_KEY = "window._env_.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqcmxpd2Vmd2ZsZ3BjemJjb3pjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNzEyNTIsImV4cCI6MjA3Nzg0NzI1Mn0.mvHQHk61d5BB2oWnUfOJrS5B9pRHYl_5L7lyV-XFcxY";
+  const SUPABASE_URL = window._env_.SUPABASE_URL;
+  const SUPABASE_ANON_KEY = window._env_.SUPABASE_ANON_KEY;
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
   const form = document.getElementById("contactForm");
   const status = document.getElementById("form-status");
 
@@ -580,7 +582,6 @@ footer {
       return;
     }
 
-    // ✅ Insert form data into Supabase
     const { error } = await supabase
       .from("contact_messages")
       .insert([{ name, email, message }]);
@@ -588,12 +589,13 @@ footer {
     if (error) {
       console.error(error);
       status.textContent = "❌ Failed to send message. Try again later.";
-    } else {  
+    } else {
       status.textContent = "✅ Message sent successfully!";
       form.reset();
     }
   });
 </script>
+
 
 
 
